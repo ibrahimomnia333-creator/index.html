@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شخصيات مصرية غيّرت التاريخ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F3E8D2;
+    --parchment-dark:#E8D9B8;
+    --ink:#1C2740;
+    --charcoal:#2A2118;
+    --gilt:#B8892B;
+    --gilt.-light:#D9AE5C;
+    --burgundy:#7A2530;
+    --plum:#5B3758;
+    --teal:#3F5D56;
+    --umber:#8C5A1E;
+    --paper-shadow: rgba(28,39,64,0.18);
+  }
+  *{ box-sizing:border-box; }
+  html,body{
+    margin:0; padding:0;
+    background:var(--parchment);
+    color:var(--charcoal);
+    font-family:'Cairo', sans-serif;
+    overflow-x:hidden;
+  }
+  body{
+    background-image:
+      radial-gradient(circle at 20% 5%, rgba(184,137,43,0.08), transparent 40%),
+      radial-gradient(circle at 90% 20%, rgba(122,37,48,0.06), transparent 45%),
+      radial-gradient(circle at 10% 90%, rgba(63,93,86,0.06), transparent 40%);
+  }
+  ::selection{ background:var(--gilt-light); color:var(--ink); }
+
+  /* ---------- Header ---------- */
+  header{
+    position:relative;
+    padding:64px 24px 40px;
+    text-align:center;
+    border-bottom:3px double var(--gilt);
+  }
+  .eyebrow{
+    font-size:13px; letter-spacing:3px; color:var(--umber);
+    font-weight:800; margin-bottom:14px; text-transform:uppercase;
+  }
+  h1{
+    font-family:'Amiri', serif; font-weight:700;
+    font-size:clamp(34px, 6vw, 62px);
+    color:var(--ink); margin:0 0 12px; line-height:1.25;
+  }
+  .subtitle{
+    font-size:17px; color:var(--charcoal); opacity:0.75;
+    max-width:620px; margin:0 auto; font-weight:400;
+  }
+  .stats{
+    display:flex; justify-content:center; gap:36px;
+    margin-top:28px; flex-wrap:wrap;
+  }
+  .stat{ text-align:center; }
+  .stat-num{
+    font-family:'Amiri', serif; font-weight:700; font-size:30px; color:var(--burgundy);
+  }
+  .stat-label{ font-size:12.5px; color:var(--charcoal); opacity:0.7; }
+  .credit{
+    margin-top:22px; font-size:14px; color:var(--burgundy); font-weight:600; letter-spacing:0.5px;
+  }
+  .ornament{ width:120px; height:14px; margin:20px auto 0; opacity:0.55; }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    max-width:920px; margin:0 auto; padding:32px 20px 8px;
+  }
+  .search-wrap{
+    display:flex; justify-content:center; margin-bottom:20px;
+  }
+  .search-input{
+    width:100%; max-width:420px;
+    font-family:'Cairo', sans-serif; font-size:15px;
+    padding:12px 20px; border-radius:999px;
+    border:1.5px solid var(--ink); background:#fffdf5; color:var(--ink);
+  }
+  .search-input:focus-visible{ outline:3px solid var(--gilt); outline-offset:2px; }
+  .filters{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+  }
+  .filter-btn{
+    font-family:'Cairo', sans-serif; font-weight:600; font-size:14px;
+    padding:9px 18px; border-radius:999px; border:1.5px solid var(--ink);
+    background:transparent; color:var(--ink); cursor:pointer; transition:all .25s ease;
+  }
+  .filter-btn:hover{ background:rgba(28,39,64,0.06); }
+  .filter-btn.active{ background:var(--ink); color:var(--parchment); }
+  .filter-btn:focus-visible{ outline:3px solid var(--gilt); outline-offset:2px; }
+
+  /* ---------- Era sections ---------- */
+  .era-section{ max-width:1120px; margin:0 auto; padding:44px 24px 8px; }
+  .era-head{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:6px;
+    border-bottom:1px solid rgba(28,39,64,0.18); padding-bottom:10px;
+  }
+  .era-title{
+    font-family:'Amiri', serif; font-weight:700; font-size:26px; color:var(--ink);
+  }
+  .era-range{
+    font-size:13px; opacity:0.6; direction:ltr; display:inline-block;
+  }
+  .era-desc{
+    font-size:14.5px; color:var(--charcoal); opacity:0.75; max-width:760px;
+    margin:8px 0 22px; line-height:1.8;
+  }
+
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:24px; padding-bottom:16px;
+  }
+  .empty-msg{
+    text-align:center; padding:60px 20px; opacity:0.6; font-size:15px;
+  }
+
+  .card{
+    position:relative;
+    background:linear-gradient(180deg, #fff8e8 0%, var(--parchment-dark) 100%);
+    border:1px solid rgba(28,39,64,0.15); border-radius:6px;
+    padding:24px 20px 20px; cursor:pointer;
+    transition:transform .3s ease, box-shadow .3s ease;
+    box-shadow:0 2px 6px var(--paper-shadow);
+    opacity:0; transform:translateY(14px);
+    animation:riseIn .5s ease forwards;
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 14px 28px var(--paper-shadow); }
+  .card:focus-visible{ outline:3px solid var(--gilt); outline-offset:3px; }
+  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
+
+  /* cartouche-style badge, evoking pharaonic name-rings */
+  .initial{
+    font-family:'Amiri', serif; font-weight:700; font-size:30px;
+    width:64px; height:46px; display:flex; align-items:center; justify-content:center;
+    border:2px solid var(--gilt); border-radius:50% / 42%;
+    color:var(--burgundy);
+    background:radial-gradient(circle, #fffdf5 0%, var(--parchment-dark) 100%);
+    margin-bottom:14px;
+  }
+  .card-name{ font-family:'Amiri', serif; font-weight:700; font-size:21px; color:var(--ink); margin:0 0 4px; }
+  .card-years{ font-size:12.5px; color:var(--charcoal); opacity:0.65; margin-bottom:10px; direction:ltr; display:inline-block; }
+  .tag{ display:inline-block; font-size:11.5px; font-weight:700; padding:4px 11px; border-radius:999px; color:#fff; }
+
+  /* ---------- Modal ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,16,10,0.6);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+    z-index:50; opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .page{
+    position:relative; max-width:640px; width:100%; max-height:86vh; overflow-y:auto;
+    background:linear-gradient(180deg, #fffaee 0%, var(--parchment) 100%);
+    border-radius:8px; padding:44px 38px 38px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.35);
+    transform:scale(0.92) translateY(10px); transition:transform .35s cubic-bezier(.2,.8,.3,1);
+  }
+  .overlay.open .page{ transform:scale(1) translateY(0); }
+  .page::before{ content:""; position:absolute; inset:10px; border:1.5px solid var(--gilt); border-radius:4px; pointer-events:none; }
+  .close-btn{
+    position:absolute; top:16px; left:16px; width:34px; height:34px; border-radius:50%;
+    border:1.5px solid var(--ink); background:transparent; color:var(--ink); font-size:18px;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2;
+  }
+  .close-btn:hover{ background:var(--ink); color:var(--parchment); }
+  .page-initial{
+    font-family:'Amiri', serif; font-weight:700; font-size:46px;
+    width:92px; height:64px; display:flex; align-items:center; justify-content:center;
+    border:2.5px solid var(--gilt); border-radius:50% / 42%; color:var(--burgundy);
+    background:radial-gradient(circle, #fffdf5 0%, var(--parchment-dark) 100%);
+    margin-bottom:18px;
+  }
+  .page-name{ font-family:'Amiri', serif; font-weight:700; font-size:30px; color:var(--ink); margin:0 0 6px; }
+  .page-era{ font-size:13px; opacity:0.6; margin-bottom:2px; }
+  .page-years{ font-size:14px; opacity:0.65; margin-bottom:14px; direction:ltr; display:inline-block; }
+  .page-bio{ font-size:15.5px; line-height:1.9; color:var(--charcoal); margin:18px 0; }
+  .idea-box{ margin-top:20px; padding:18px 20px; border-right:4px solid var(--gilt); background:rgba(184,137,43,0.08); border-radius:4px; }
+  .idea-label{ font-size:12px; font-weight:800; color:var(--umber); letter-spacing:1px; margin-bottom:8px; text-transform:uppercase; }
+  .idea-text{ font-family:'Amiri', serif; font-size:17.5px; line-height:1.8; color:var(--ink); }
+
+  footer{ text-align:center; padding:30px 20px 50px; font-size:13.5px; color:var(--charcoal); opacity:0.6; }
+
+  @media (prefers-reduced-motion: reduce){ .card, .page, .overlay{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">إعداد جويرية إبراهيم الميهي</div>
+  <h1>مصريون غيّروا التاريخ</h1>
+  <p class="subtitle">رحلة عبر خمسة عصور من تاريخ مصر، من بناة الأهرام إلى علماء اليوم، تجمع سِيَر من صنعوا حضارة امتدت خمسة آلاف عام</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="statCount">0</div><div class="stat-label">شخصية</div></div>
+    <div class="stat"><div class="stat-num">٥</div><div class="stat-label">عصور تاريخية</div></div>
+    <div class="stat"><div class="stat-num">٥٠٠٠+</div><div class="stat-label">عام من الحضارة</div></div>
+  </div>
+  <svg class="ornament" viewBox="0 0 120 14" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="7" x2="45" y2="7" stroke="#B8892B" stroke-width="1.5"/>
+    <circle cx="60" cy="7" r="5" fill="none" stroke="#B8892B" stroke-width="1.5"/>
+    <line x1="75" y1="7" x2="120" y2="7" stroke="#B8892B" stroke-width="1.5"/>
+  </svg>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <input class="search-input" id="searchInput" type="text" placeholder="ابحثي عن شخصية بالاسم…">
+  </div>
+  <div class="filters" id="filters"></div>
+</div>
+
+<main id="eraContainer"></main>
+
+<div class="overlay" id="overlay">
+  <div class="page" id="pageContent" role="dialog" aria-modal="true"></div>
+</div>
+
+<footer>إعداد: جويرية إبراهيم الميهي · جولة تعريفية في سير أبرز الشخصيات المصرية المؤثرة عبر التاريخ</footer>
+
+<script>
+const fields = {
+  science:  { label:"علوم ومعرفة",  color:"#3F5D56" },
+  politics: { label:"قيادة وسياسة", color:"#7A2530" },
+  thought:  { label:"فكر واجتماع",  color:"#5B3758" },
+  art:      { label:"أدب وفن",      color:"#8C5A1E" },
+};
+
+const eras = [
+  { key:"pharaonic", title:"مصر الفرعونية", range:"3100 – 30 ق.م",
+    desc:"عصر بناة الأهرام والمعابد، حين قامت أولى الدول المركزية المنظمة في التاريخ على ضفاف النيل." },
+  { key:"greco", title:"مصر البطلمية واليونانية-الرومانية", range:"332 ق.م – 641 م",
+    desc:"مصر بعد الإسكندر الأكبر، حين كانت الإسكندرية أعظم مراكز العلم والمعرفة في العالم القديم." },
+  { key:"islamic", title:"مصر الإسلامية والوسيطة", range:"641 – 1517 م",
+    desc:"من الفتح الإسلامي إلى عصر المماليك، حين أصبحت مصر مركزاً للعلم والقيادة العسكرية في العالم الإسلامي." },
+  { key:"modern", title:"مصر الحديثة (عصر النهضة)", range:"1805 – 1952 م",
+    desc:"عصر بناء الدولة الحديثة والنهضة الفكرية والاجتماعية في القرنين التاسع عشر والعشرين." },
+  { key:"contemporary", title:"مصر المعاصرة", range:"1952 م – اليوم",
+    desc:"من ثورة 1952 إلى اليوم، أعلام في السياسة والعلم والأدب شكّلوا وجه مصر الحديثة." },
+];
+
+const figures = [
+  // ---- Pharaonic ----
+  { name:"الملك مينا (نارمر)", years:"نحو 3100 ق.م", era:"pharaonic", field:"politics",
+    bio:"أول ملك وحّد مصر العليا والسفلى في دولة واحدة، مؤسساً بذلك أول أسرة حاكمة وأول دولة مركزية موثقة في التاريخ.",
+    idea:"وحدة الأرض والصف هي الأساس الذي تُبنى عليه أي حضارة تدوم." },
+  { name:"إيمحوتب", years:"نحو 2650 – 2600 ق.م", era:"pharaonic", field:"science",
+    bio:"مهندس ووزير وطبيب في عهد الملك زوسر، صمم هرم سقارة المدرج وهو أول بناء حجري ضخم في التاريخ، ويُعد أول عالم ومهندس معروف بالاسم في العالم.",
+    idea:"العقل الذي يجمع بين الهندسة والطب والحكمة قادر أن يترك أثراً يفوق عمر الملوك أنفسهم." },
+  { name:"الملكة حتشبسوت", years:"نحو 1507 – 1458 ق.م", era:"pharaonic", field:"politics",
+    bio:"من أعظم الحكام في مصر القديمة وإحدى أشهر النساء اللواتي تولين الحكم بلقب فرعون كامل الصلاحيات، اشتهرت ببعثتها التجارية إلى بلاد بونت وبمعبدها الجنائزي بالدير البحري.",
+    idea:"القدرة على الحكم لا يحدها جنس الحاكم، بل حكمته في إدارة السلم والتجارة والعمران." },
+  { name:"الملك توت عنخ آمون", years:"نحو 1341 – 1323 ق.م", era:"pharaonic", field:"politics",
+    bio:"ملك شاب تولى العرش في سن التاسعة وأعاد عبادة آمون بعد فترة إخناتون، لكن شهرته العالمية جاءت من اكتشاف مقبرته شبه السليمة عام 1922 بكنوزها الذهبية.",
+    idea:"أحياناً يخلّد التاريخُ اسماً لا بسبب إنجاز حاكم، بل بسبب ما بقي محفوظاً لنا منه." },
+  { name:"إخناتون", years:"نحو 1353 – 1336 ق.م", era:"pharaonic", field:"thought",
+    bio:"الملك الذي حاول فرض عبادة الإله آتون وحده بدلاً من تعدد الآلهة التقليدي، ونقل العاصمة إلى مدينة أخيتاتون، في واحدة من أولى محاولات التوحيد الديني الكبرى في التاريخ المسجل.",
+    idea:"تغيير معتقدات مجتمع بأكمله يحتاج جرأة تفوق أحياناً قدرة الزمن نفسه على الاستمرار." },
+  { name:"رمسيس الثاني", years:"نحو 1303 – 1213 ق.م", era:"pharaonic", field:"politics",
+    bio:"أحد أعظم الفراعنة العسكريين والبنائين، خاض معركة قادش الشهيرة ووقّع أول معاهدة سلام موثقة في التاريخ، وشيّد معابد أبو سمبل ورمسيوم.",
+    idea:"القوة العسكرية وحدها لا تصنع مجداً باقياً؛ السلام الموثق والبناء هما ما يخلّد اسم الحاكم." },
+
+  // ---- Greco-Roman / Ptolemaic ----
+  { name:"كليوباترا السابعة", years:"69 – 30 ق.م", era:"greco", field:"politics",
+    bio:"آخر ملوك مصر البطلمية، حكمت في فترة مضطربة من الصراع بين روما ومصر، واشتهرت بذكائها السياسي وإتقانها عدة لغات، وسعت للحفاظ على استقلال مصر أمام الزحف الروماني.",
+    idea:"في السياسة، التحالف الذكي وسرعة القراءة للموقف قد يحفظان عرشاً لا يقوى عليه جيش." },
+  { name:"إقليدس", years:"نحو 325 – 265 ق.م", era:"greco", field:"science",
+    bio:"عالم رياضيات عمل في الإسكندرية، ويُعرف بأبي الهندسة لكتابه «الأصول» الذي وضع الأساس المنطقي للهندسة الإقليدية، وظل مرجعاً تعليمياً لأكثر من ألفي عام.",
+    idea:"البرهان المنطقي المتسلسل من بديهيات بسيطة يمكن أن يبني صرحاً معرفياً يصمد آلاف السنين." },
+  { name:"إراتوستينس", years:"نحو 276 – 194 ق.م", era:"greco", field:"science",
+    bio:"عالم وجغرافي أدار مكتبة الإسكندرية، واشتهر بحسابه شبه الدقيق لمحيط الأرض باستخدام زاوية الشمس فقط في مدينتين مصريتين مختلفتين، في تجربة تُدرَّس حتى اليوم كنموذج للعبقرية العلمية.",
+    idea:"بأدوات بسيطة وملاحظة دقيقة، يمكن قياس الكوكب بأكمله دون مغادرة أرض مصر." },
+  { name:"هيباتيا", years:"نحو 360 – 415 م", era:"greco", field:"science",
+    bio:"عالمة رياضيات وفلك وفلسفة في الإسكندرية، قادت مدرسة أفلاطونية الفكر وألّفت شروحاً علمية مهمة، وتُعد من أوائل النساء المعروفات في تاريخ العلوم.",
+    idea:"المعرفة لا تعرف جنساً، والعقل الباحث عن الحقيقة يستحق الاحترام في كل عصر." },
+
+  // ---- Islamic / medieval ----
+  { name:"عمرو بن العاص", years:"نحو 573 – 664 م", era:"islamic", field:"politics",
+    bio:"قائد عسكري وسياسي فتح مصر للدولة الإسلامية عام 641م، وأسس مدينة الفسطاط أول عاصمة إسلامية في مصر، وتولى ولايتها مرتين.",
+    idea:"بناء مدينة جديدة قد يكون بداية أعمق أثراً من أي فتح عسكري وحده." },
+  { name:"صلاح الدين الأيوبي", years:"1137 – 1193 م", era:"islamic", field:"politics",
+    bio:"قائد عسكري تولى حكم مصر وأسس الدولة الأيوبية، ووحّد مصر والشام، واشتهر باسترداد القدس من الصليبيين عام 1187 وبمعاملته الإنسانية لخصومه.",
+    idea:"النصر الحقيقي لا يقاس بالغلبة العسكرية وحدها، بل بالعدل الذي يُظهره المنتصر بعدها." },
+  { name:"الظاهر بيبرس", years:"1223 – 1277 م", era:"islamic", field:"politics",
+    bio:"سلطان مملوكي حكم من القاهرة، قاد الانتصار على المغول في معركة عين جالوت وطارد فلول الحروب الصليبية، ونظّم الدولة المملوكية إدارياً وعسكرياً.",
+    idea:"الدفاع عن الأرض يحتاج جيشاً منظماً، لكن استمرار الدولة يحتاج نظاماً إدارياً يبقى بعد القائد." },
+  { name:"ابن النفيس", years:"1213 – 1288 م", era:"islamic", field:"science",
+    bio:"طبيب مصري من القاهرة، اكتشف الدورة الدموية الصغرى بين القلب والرئتين قبل قرون من العلماء الأوروبيين، وألّف موسوعات طبية مهمة في زمانه.",
+    idea:"الملاحظة الدقيقة للجسد البشري قادرة أن تسبق زمانها بقرون إذا صاحبها عقل متسائل." },
+  { name:"المقريزي", years:"1364 – 1442 م", era:"islamic", field:"thought",
+    bio:"مؤرخ مصري من القاهرة، وثّق تاريخ مصر وعمرانها وأحوالها الاقتصادية في كتابه «الخطط»، ويُعد من أهم من أرّخوا للمجتمع المصري في العصور الوسطى.",
+    idea:"من لا يوثّق تاريخ مدينته وعمرانها، يترك لمن بعده فراغاً لا يملأه إلا التخمين." },
+
+  // ---- Modern (Nahda) ----
+  { name:"محمد علي باشا", years:"1769 – 1849 م", era:"modern", field:"politics",
+    bio:"والي مصر العثماني الذي أسس أسرة حاكمة استمرت حتى 1952، وأطلق مشروعاً واسعاً لتحديث الجيش والصناعة والتعليم، ويُعتبر مؤسس مصر الحديثة.",
+    idea:"بناء دولة حديثة يبدأ من جيش منظم وتعليم ومصانع، لا من الشعارات وحدها." },
+  { name:"رفاعة الطهطاوي", years:"1801 – 1873 م", era:"modern", field:"thought",
+    bio:"عالم أزهري ومترجم أوفدته الدولة إلى باريس، فعاد بأفكار التنوير الأوروبي ونقلها إلى مصر عبر كتاباته وترجماته، ويُعد من أبرز رواد النهضة الفكرية الحديثة.",
+    idea:"الانفتاح على معرفة الآخر لا يعني التخلي عن الهوية، بل تجديدها بأدوات العصر." },
+  { name:"أحمد عرابي", years:"1841 – 1911 م", era:"modern", field:"politics",
+    bio:"ضابط مصري قاد الثورة العرابية عام 1881 مطالباً بإصلاح الجيش وإنهاء هيمنة الأجانب على الحكم، تحت شعار «مصر للمصريين»، قبل أن ينتهي التمرد بالاحتلال البريطاني لمصر.",
+    idea:"المطالبة بالكرامة الوطنية قد لا تنتصر في معركتها الأولى، لكنها تبقى شعلة لمن يأتي بعدها." },
+  { name:"قاسم أمين", years:"1863 – 1908 م", era:"modern", field:"thought",
+    bio:"مفكر وقاضٍ مصري كتب كتاب «تحرير المرأة» داعياً إلى تعليم المرأة ورفع القيود الاجتماعية عنها، فأثار جدلاً واسعاً في مجتمعه وأصبح مرجعاً مبكراً للفكر النسوي العربي.",
+    idea:"تقدّم أي مجتمع يُقاس أيضاً بمكانة نسائه وفرصهن في التعليم والمشاركة." },
+  { name:"هدى شعراوي", years:"1879 – 1947 م", era:"modern", field:"politics",
+    bio:"رائدة الحركة النسوية المصرية، أسست أول اتحاد نسائي مصري وشاركت في المظاهرات الوطنية ضد الاحتلال البريطاني، واشتهر موقفها الرمزي بخلع النقاب علناً عام 1923.",
+    idea:"المشاركة الوطنية والدعوة لحقوق المرأة يمكن أن تسيرا معاً في نضال واحد." },
+  { name:"طه حسين", years:"1889 – 1973 م", era:"modern", field:"art",
+    bio:"أديب ومفكر فقد بصره في طفولته، ولُقّب بعميد الأدب العربي لإسهامه الواسع في النقد والرواية والتعليم، وأشرف على إصلاحات تعليمية جعلت التعليم حقاً أقرب لعموم المصريين.",
+    idea:"فقدان حاسة واحدة لا يمنع عقلاً مصمماً من أن يصبح ضميراً أدبياً لأمة بأكملها." },
+
+  // ---- Contemporary ----
+  { name:"نجيب محفوظ", years:"1911 – 2006 م", era:"contemporary", field:"art",
+    bio:"روائي مصري وأول عربي يفوز بجائزة نوبل في الأدب عام 1988، صوّر في رواياته مثل «الثلاثية» و«أولاد حارتنا» حياة المجتمع المصري بتفاصيله الاجتماعية والسياسية عبر عقود.",
+    idea:"حارة صغيرة في قلب القاهرة يمكن أن تختصر قصة إنسانية تفهمها كل شعوب العالم." },
+  { name:"أم كلثوم", years:"1898 – 1975 م", era:"contemporary", field:"art",
+    bio:"مطربة مصرية لُقّبت بكوكب الشرق، وتُعد من أعظم الأصوات الغنائية في التاريخ العربي، امتد تأثيرها الفني والثقافي عبر العالم العربي لعقود طويلة.",
+    idea:"الصوت وحده، حين يُتقن حمل الكلمة واللحن معاً، قد يوحّد جمهوراً يمتد عبر قارة كاملة." },
+  { name:"جمال عبد الناصر", years:"1918 – 1970 م", era:"contemporary", field:"politics",
+    bio:"ضابط مصري قاد ثورة 1952 وأصبح ثاني رئيس لمصر، اشتهر بتأميم قناة السويس عام 1956 وقيادته لتيار القومية العربية، وتظل سياساته موضع تقييم متباين بين مؤيد ومعارض حتى اليوم.",
+    idea:"القرارات الكبرى في تاريخ الأمم غالباً ما تُقرأ بأكثر من رواية، بحسب من يرويها ولماذا." },
+  { name:"أنور السادات", years:"1918 – 1981 م", era:"contemporary", field:"politics",
+    bio:"رئيس مصر الثالث، قاد حرب أكتوبر 1973 ثم وقّع معاهدة سلام مع إسرائيل عام 1979 حصل بموجبها على جائزة نوبل للسلام، في قرار ظل ولا يزال محل جدل سياسي واسع في مصر والعالم العربي.",
+    idea:"القرار بالانتقال من الحرب إلى السلام قد يكسب صاحبه تقديراً عالمياً وجدلاً محلياً في آنٍ واحد." },
+  { name:"أحمد زويل", years:"1946 – 2016 م", era:"contemporary", field:"science",
+    bio:"عالم كيمياء مصري أمريكي، حصل على جائزة نوبل في الكيمياء عام 1999 عن أبحاثه الرائدة في «كيمياء الفيمتو ثانية» التي مكّنت من رصد حركة الذرات أثناء التفاعلات الكيميائية.",
+    idea:"يمكن رصد أسرع الظواهر في الكون إذا توفرت الأداة المناسبة والفضول الكافي لملاحقتها." },
+  { name:"مصطفى مشرفة", years:"1898 – 1950 م", era:"contemporary", field:"science",
+    bio:"عالم فيزياء نظرية مصري، من أوائل العلماء العرب الذين تعمقوا في النسبية والفيزياء الحديثة، وأسهم في تأسيس تدريس الفيزياء الحديثة في الجامعات المصرية.",
+    idea:"نقل علم متقدم إلى لغة وبيئة جديدة يحتاج عالماً يجيد الجسر بين عالمين معرفيين مختلفين." },
+  { name:"محمود مختار", years:"1891 – 1934 م", era:"contemporary", field:"art",
+    bio:"يُعد أول نحات مصري حديث ورائد فن النحت المصري المعاصر، واشتهر بتمثال «نهضة مصر» الذي جسّد فيه رمزياً استيقاظ الوعي الوطني المصري في مطلع القرن العشرين.",
+    idea:"تمثال واحد، حين يُحسن اختيار رمزيته، قادر أن يختصر شعور أمة كاملة تجاه لحظتها التاريخية." },
+];
+
+const grid_container = document.getElementById('eraContainer');
+const filtersEl = document.getElementById('filters');
+const overlay = document.getElementById('overlay');
+const pageContent = document.getElementById('pageContent');
+const searchInput = document.getElementById('searchInput');
+let activeField = 'all';
+let searchTerm = '';
+
+function buildFilters(){
+  const all = document.createElement('button');
+  all.className = 'filter-btn active';
+  all.textContent = 'كل المجالات';
+  all.onclick = () => setFilter('all', all);
+  filtersEl.appendChild(all);
+  Object.entries(fields).forEach(([key, val]) => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = val.label;
+    btn.onclick = () => setFilter(key, btn);
+    filtersEl.appendChild(btn);
+  });
+}
+
+function setFilter(key, btn){
+  activeField = key;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function render(){
+  grid_container.innerHTML = '';
+  let totalShown = 0;
+
+  eras.forEach(era => {
+    const list = figures.filter(f =>
+      f.era === era.key &&
+      (activeField === 'all' || f.field === activeField) &&
+      (searchTerm === '' || f.name.toLowerCase().includes(searchTerm))
+    );
+    if(list.length === 0) return;
+    totalShown += list.length;
+
+    const section = document.createElement('section');
+    section.className = 'era-section';
+    section.innerHTML = `
+      <div class="era-head">
+        <div class="era-title">${era.title}</div>
+        <div class="era-range">${era.range}</div>
+      </div>
+      <p class="era-desc">${era.desc}</p>
+      <div class="grid"></div>
+    `;
+    const gridEl = section.querySelector('.grid');
+
+    list.forEach((f, i) => {
+      const field = fields[f.field];
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.animationDelay = (i * 0.04) + 's';
+      card.tabIndex = 0;
+      card.setAttribute('role','button');
+      card.innerHTML = `
+        <div class="initial">${f.name.trim()[0]}</div>
+        <h3 class="card-name">${f.name}</h3>
+        <div class="card-years">${f.years}</div><br/>
+        <span class="tag" style="background:${field.color}">${field.label}</span>
+      `;
+      card.addEventListener('click', () => openPage(f, era));
+      card.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') openPage(f, era); });
+      gridEl.appendChild(card);
+    });
+
+    grid_container.appendChild(section);
+  });
+
+  if(totalShown === 0){
+    grid_container.innerHTML = `<div class="empty-msg">لا توجد نتائج مطابقة للبحث أو الفلتر المختار.</div>`;
+  }
+
+  animateCount(totalShown);
+}
+
+function animateCount(target){
+  const el = document.getElementById('statCount');
+  const toArabicDigits = n => String(n).replace(/[0-9]/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+  let current = 0;
+  const step = Math.max(1, Math.ceil(target / 20));
+  clearInterval(el._timer);
+  el._timer = setInterval(() => {
+    current += step;
+    if(current >= target){ current = target; clearInterval(el._timer); }
+    el.textContent = toArabicDigits(current);
+  }, 25);
+}
+
+function openPage(f, era){
+  const field = fields[f.field];
+  pageContent.innerHTML = `
+    <button class="close-btn" aria-label="إغلاق" onclick="closePage()">×</button>
+    <div class="page-initial">${f.name.trim()[0]}</div>
+    <div class="page-era">${era.title}</div>
+    <h2 class="page-name">${f.name}</h2>
+    <div class="page-years">${f.years}</div><br/>
+    <span class="tag" style="background:${field.color}">${field.label}</span>
+    <p class="page-bio">${f.bio}</p>
+    <div class="idea-box">
+      <div class="idea-label">الفكرة المحورية</div>
+      <div class="idea-text">${f.idea}</div>
+    </div>
+  `;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePage(){
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+overlay.addEventListener('click', e => { if(e.target === overlay) closePage(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closePage(); });
+searchInput.addEventListener('input', e => { searchTerm = e.target.value.trim().toLowerCase(); render(); });
+
+buildFilters();
+render();
+</script>
+
+</body>
+</html>
